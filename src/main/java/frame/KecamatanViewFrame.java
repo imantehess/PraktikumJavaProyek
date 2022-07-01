@@ -61,7 +61,7 @@ public class KecamatanViewFrame extends JFrame{
                 ResultSet rs = ps.executeQuery();
                 DefaultTableModel dtm = (DefaultTableModel) viewTable.getModel();
                 dtm.setRowCount(0);
-                Object[] row = new Object[6];
+                Object[] row = new Object[7];
                 while (rs.next()) {
                     row[0] = rs.getInt("id");
                     row[1] = rs.getString("nama");
@@ -69,6 +69,7 @@ public class KecamatanViewFrame extends JFrame{
                     row[2] = rs.getString("klasifikasi");
                     row[4] = rs.getInt("populasi");
                     row[5] = rs.getDouble("luas");
+                    row[6] = rs.getString("email");
                     dtm.addRow(row);
                 }
             } catch (SQLException ex) {
@@ -141,7 +142,7 @@ public class KecamatanViewFrame extends JFrame{
         try {
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery(selectSQL);
-            String header[] = {"Id", "Nama Kecamatan", "Nama Kabupaten", "Klasifikasi", "populasi", "luas"};
+            String header[] = {"Id", "Nama Kecamatan", "Nama Kabupaten", "Klasifikasi", "populasi", "luas", "Email"};
             DefaultTableModel dtm = new DefaultTableModel(header, 0);
             viewTable.setModel(dtm);
 
@@ -154,8 +155,9 @@ public class KecamatanViewFrame extends JFrame{
             rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
             viewTable.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
             viewTable.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+            viewTable.getColumnModel().getColumn(6).setCellRenderer(rightRenderer);
 
-            Object[] row = new Object[6];
+            Object[] row = new Object[7];
 
             while (rs.next()) {
 
@@ -169,6 +171,7 @@ public class KecamatanViewFrame extends JFrame{
                 row[3] = rs.getString("klasifikasi");
                 row[4] = rowPopulasi;
                 row[5] = rowLuas;
+                row[6] = rs.getString("email");
                 dtm.addRow(row);
 
             }
