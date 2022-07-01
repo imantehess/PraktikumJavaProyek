@@ -88,6 +88,11 @@ public class KabupatenViewFrame extends JFrame{
         });
         //end perintah hapus button
 
+        //tambah button
+        tambahButton.addActionListener(e -> {
+            KabupatenInputFrame inputFrame = new KabupatenInputFrame();
+            inputFrame.setVisible(true);
+        });
 
         isiTable();
         init();
@@ -101,11 +106,13 @@ public class KabupatenViewFrame extends JFrame{
             ResultSet rs = s.executeQuery(selectSQL);
             String header[] = {"Id", "Nama Kabupaten"};
             DefaultTableModel dtm = new DefaultTableModel(header, 0);
-            viewTable.setModel(dtm);Object[] row = new Object[3];
+            viewTable.setModel(dtm);Object[] row = new Object[2];
+            viewTable.removeColumn(viewTable.getColumnModel().getColumn(0));
             while (rs.next()) {
                 row[0] = rs.getInt("id");
                 row[1] = rs.getString("nama");
                 dtm.addRow(row);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
