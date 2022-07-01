@@ -37,6 +37,17 @@ public class KabupatenViewFrame extends JFrame{
 
         //cari button
         cariButton.addActionListener(e -> {
+
+            if (cariTextField.getText().equals("")) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Isi Kata Kunci Pencarian",
+                        "Validasi Kata Kunci kosong",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
             Connection c = Koneksi.getConnection();
             String keyword = "%" + cariTextField.getText() + "%";
             String searchSQL = "SELECT * FROM kabupaten WHERE nama like ?";
